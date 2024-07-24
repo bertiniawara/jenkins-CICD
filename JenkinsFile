@@ -9,11 +9,10 @@ pipeline {
     stage('Clean Workspace') {
       steps {
         deleteDir()
-       }
-     }
-    stage("Git Clone"){
-      steps{
-        git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bertiniawara/jenkins-CICD.git' 
+        sshagent(credentials: [GIT_HUB_CREDENTIALS]) {
+            sh "git clone --recursive git@github.com:bertiniawara/jenkins-CICD.git"
+          }
+        echo "clone_project"
        }
      }
     stage('Build and Test') {
