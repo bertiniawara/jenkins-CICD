@@ -6,6 +6,11 @@ pipeline {
       }
     }
   stages {
+    stage('Clean Workspace') {
+      steps {
+        deleteDir()
+       }
+     }
     stage("Git Clone"){
       steps{
         git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/bertiniawara/jenkins-CICD.git' 
